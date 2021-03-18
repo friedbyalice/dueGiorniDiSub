@@ -1,3 +1,5 @@
+import datetime
+
 class Article:
     def __init__(self, title, description, link, pub_date):
         self.title = title
@@ -5,17 +7,17 @@ class Article:
         self.link = link
         self.pub_date = pub_date
 
-    def send(self, bot, ChatID):
+    def send(self, ChatID):
         print("You should implement this method yourself")
 
 class Feed:
     def __init__(self):
         self.items = list()
 
-    def sendUpdates(self, bot, ChatID, lastUpdate):
+    def sendUpdates(self, ChatID, bot, lastUpdate=datetime.date.fromtimestamp(0)):
         count = 0
-        toBeSent = filter(lambda item: item.lastUpdate > lastUpdate, self.items)
-        if len(toBeSent)>0:
+        if any(item.pub_date > lastUpdate for item in self.items):
             bot.sendMessage(chat_id=ChatID, text="*"+self.title+"*", parse_mode='MarkdownV2')
-        for item in toBeSent:
-            item.send(bot, ChatID)
+            toBeSent = filter(lambda item: item.pub_date > lastUpdate, self.items)
+            for item in toBeSent:
+                item.send(ChatID, bot)

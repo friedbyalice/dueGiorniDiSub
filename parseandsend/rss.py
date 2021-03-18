@@ -1,9 +1,9 @@
 import atoma
 from requests import get
-from _article import Article, Feed
+from parseandsend._article import Article, Feed
 
 class RssArticle(Article):
-    def send(self, bot, ChatID):
+    def send(self, ChatID, bot):
         messageContent = "*" + self.title + "*\n" + self.description + "\n" + self.link
         bot.sendMessage(chat_id=ChatID, text=messageContent, parse_mode='MarkdownV2')
 
@@ -16,3 +16,4 @@ class RssFeed(Feed):
         self.title = feed.title
         for item in feed.items:
            self.items.append(RssArticle(item.title, item.description, item.link, item.pub_date))
+        self.items.reverse()
