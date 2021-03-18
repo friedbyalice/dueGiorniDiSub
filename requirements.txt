@@ -1,0 +1,6 @@
+SQLAlchemy~=1.4.0
+toml~=0.10.2
+setuptools~=54.1.2
+atoma~=0.0.17
+requests~=2.24.0
+podcastparser~=0.6.6
