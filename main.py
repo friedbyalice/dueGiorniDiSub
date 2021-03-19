@@ -3,7 +3,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
                      level=logging.INFO)
 
 
-from telegram.ext import Updater
+from telegram.ext import Updater, JobQueue
 from config import config
 
 updater = Updater(token=config['TOKEN'])
@@ -20,3 +20,9 @@ dispatcher.add_handler(setFeedTime)
 dispatcher.add_handler(debugMagic)
 
 updater.start_polling()
+
+# from routines import createRoutine
+# import threading
+# routine = createRoutine(bot)
+#
+# threading.Timer(config['UPDATE_FREQ'], routine).start()

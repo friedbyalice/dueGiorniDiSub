@@ -117,7 +117,10 @@ def _forceUpdate(update, context):
 
 def _setFeedTime(update, context):
     newFeedTime = time.fromisoformat(context.args[0])
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Your new feed time is " + str(newFeedTime.hour) + ":" + str(newFeedTime.minute))
+    currUser = session.query(schema.User).filter(schema.User.UID == update.effective_user.id).first()
+    currUser.FeedTime = newFeedTime
+    session.commit()
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Your new feed time is " + str(newFeedTime.hour).zfill(2) + ":" + str(newFeedTime.minute).zfill(2))
 
 def _debugMagic(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="UID: " + str(update.effective_user.id) + "\nChatID: " + str(update.effective_chat.id))
