@@ -6,4 +6,4 @@ alla stessa ora.
 
 Bot online @ [dueGiorniDiSub](https://t.me/dailyRssBot)
 
-Invio automatico giornaliero in sviluppo (WIP ~ 2 hours)
+Invio automatico giornaliero in sviluppo (trigger manuale con /forceUpdate)
